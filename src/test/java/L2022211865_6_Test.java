@@ -30,8 +30,7 @@ public class L2022211865_6_Test {
         Solution6 solution = new Solution6();
         List<Integer> result = solution.peopleIndexes(favoriteCompanies);
 
-        //assertEquals(Arrays.asList(0, 1, 4), result);正确的
-        assertEquals(Arrays.asList( 1,2, 4), result);
+        assertEquals(Arrays.asList(0, 1, 4), result);
     }
 
     @Test
@@ -50,8 +49,7 @@ public class L2022211865_6_Test {
         Solution6 solution = new Solution6();
         List<Integer> result = solution.peopleIndexes(favoriteCompanies);
 
-        //assertEquals(Arrays.asList(0, 1, 2, 3), result);正确的
-        assertEquals(Arrays.asList( 1, 2, 3), result);
+        assertEquals(Arrays.asList(0, 1, 2, 3), result);
     }
 
     @Test

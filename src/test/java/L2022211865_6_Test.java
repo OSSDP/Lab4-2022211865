@@ -197,4 +197,48 @@ public class L2022211865_6_Test {
             assertTrue(e.getMessage().contains("用户的公司清单各不相同"));
         }
     }
+    @Test
+    public void testPeopleIndexesWithAllEmptyLists() {
+        // 测试目的：验证所有用户收藏的公司清单都是空的情况
+        // 用到的测试用例：
+        // favoriteCompanies = [[], [], [], []]
+        // 预期输出：抛出 IllegalArgumentException
+
+        List<List<String>> favoriteCompanies = new ArrayList<>();
+        for (int i = 0; i < 4; i++) {
+            favoriteCompanies.add(new ArrayList<>());
+        }
+
+        Solution6 solution = new Solution6();
+        try {
+            solution.peopleIndexes(favoriteCompanies);
+            fail("Expected IllegalArgumentException to be thrown");
+        } catch (IllegalArgumentException e) {
+            // 验证异常信息
+            assertTrue(e.getMessage().contains("用户的公司清单不能为空，且公司数量不能超过500"));
+        }
+    }
+
+    @Test
+    public void testPeopleIndexesWithSomeEmptyLists() {
+        // 测试目的：验证部分用户收藏的公司清单是空的情况
+        // 用到的测试用例：
+        // favoriteCompanies = [["google", "facebook"], [], ["amazon"], ["microsoft"]]
+        // 预期输出：抛出 IllegalArgumentException
+
+        List<List<String>> favoriteCompanies = new ArrayList<>();
+        favoriteCompanies.add(Arrays.asList("google", "facebook"));
+        favoriteCompanies.add(new ArrayList<>()); // 空的公司清单
+        favoriteCompanies.add(Arrays.asList("amazon"));
+        favoriteCompanies.add(Arrays.asList("microsoft"));
+
+        Solution6 solution = new Solution6();
+        try {
+            solution.peopleIndexes(favoriteCompanies);
+            fail("Expected IllegalArgumentException to be thrown");
+        } catch (IllegalArgumentException e) {
+            // 验证异常信息
+            assertTrue(e.getMessage().contains("用户的公司清单不能为空，且公司数量不能超过500"));
+        }
+    }
 }

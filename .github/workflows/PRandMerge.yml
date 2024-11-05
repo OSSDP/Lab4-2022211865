@@ -26,13 +26,17 @@ jobs:
 
       - name: Run tests with Maven
         run: mvn -B test --file pom.xml
-
-      - name: Auto Merge PR
+        
+      - name: automerge
         if: ${{ success() }}
-        uses: repo-sync/github-action@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          source_branch: ${{ github.head_ref }}
-          target_branch: ${{ github.base_ref }}
-          merge_method: merge
-          delete_source_branch: true
+        uses: "pascalgn/automerge-action@v0.16.4"
+        env:
+          GITHUB_TOKEN: "${{ secrets.PAT }}"
+          MERGE_LABELS: "approved,auto merge,!ready to review"
+          MERGE_METHOD: "squash"
+          MERGE_COMMIT_MESSAGE: "automatic"
+          MERGE_FORKS: "true"
+          MERGE_RETRIES: "50"
+          MERGE_RETRY_SLEEP: "10000"
+          MERGE_REQUIRED_APPROVALS: "1"
+          UPDATE_METHOD: "rebase"
